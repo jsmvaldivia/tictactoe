@@ -1,14 +1,14 @@
 package org.tictactoe;
 
-import java.util.List;
-import java.util.Stack;
+import java.util.ArrayDeque;
+import java.util.Deque;
 
 public final class Game {
 
   public record Move(Player player, Board.Position position) {}
 
   private final Board board;
-  private final Stack<Move> history;
+  private final Deque<Move> history;
 
   private boolean finished = false;
   private boolean draw = false;
@@ -16,7 +16,7 @@ public final class Game {
 
   private Game(Board board) {
     this.board = board;
-    history = new Stack<>();
+    history = new ArrayDeque<>();
   }
 
   public Board newBoard() {
@@ -41,7 +41,6 @@ public final class Game {
     board.play(player, position);
     history.add(new Move(player, position));
     checkWinner();
-
   }
 
   private void checkWinner() {
@@ -61,7 +60,7 @@ public final class Game {
     return board;
   }
 
-  public List<Move> getHistory() {
+  public Deque<Move> getHistory() {
     return history;
   }
 
@@ -73,7 +72,8 @@ public final class Game {
     return draw;
   }
 
-  public Player getWinner() {
+  public Player getWinner()
+  {
     return winner;
   }
 
@@ -82,6 +82,8 @@ public final class Game {
   }
 
   private boolean isPositionPlayedAlready(Board.Position position) {
-    return history.stream().anyMatch(move -> move.position().equals(position));
+    return history
+            .stream()
+            .anyMatch(move -> move.position().equals(position));
   }
 }
