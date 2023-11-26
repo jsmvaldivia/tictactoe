@@ -57,7 +57,7 @@ jobs:
         if [ ${#differing_files[@]} -gt 0 ]; then
          comment="Suggested code formatting changes:"
          for file in "${differing_files[@]}"; do
-           comment+="\n\n### ${file}\n\`\`\`java\n$(cat "$file")\n\`\`\`"
+           comment+="### ${file}"
          done
 
           # Print the comment
