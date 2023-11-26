@@ -49,9 +49,9 @@ jobs:
         done
 
         if [ ${#differing_files[@]} -gt 0 ]; then
-         comment="## The following files are not properly formatted according to formatting guidelines: \n "
+         comment="## The following files are not properly formatted according to formatting guidelines:  <br /> "
          for file in "${differing_files[@]}"; do
-           comment+="* ${file} \n "
+           comment+=" - ${file} "
          done
 
           # Print the comment
