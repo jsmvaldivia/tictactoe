@@ -49,7 +49,7 @@ jobs:
         done
 
         if [ ${#differing_files[@]} -gt 0 ]; then
-         comment="## The following files are not properly formatted according to formatting guidelines:
+         comment="## The following files are not properly formatted according to guidelines:
          "
          for file in "${differing_files[@]}"; do
            comment+="* ${file} 
@@ -58,7 +58,7 @@ jobs:
 
           # Print the comment
           echo "$comment" > comment_file
-          gh pr comment ${{ github.event.number }} -F comment_file
+          gh pr comment ${{ github.event.number }} -F comment_file --edit-last
           
           echo "::error::Code formatting suggestion detected. Please review and apply the suggested changes."
           exit 1
