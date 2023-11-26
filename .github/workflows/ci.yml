@@ -43,5 +43,6 @@ jobs:
         json_data=$(echo -n  $FILES | jq -R -s '{ javaFiles: split(" ") | map(select(test("\\.java$")))}')
         
         for file in $(echo "$json_data" | jq -r '.java_files[]'); do java -jar google-java-format-1.18.1-all-deps.jar "$file" > "${file}_formatted"; done
+        cd src/main/java/org/tictactoe
         ls -larth
         
