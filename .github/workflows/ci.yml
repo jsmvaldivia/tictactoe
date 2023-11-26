@@ -35,11 +35,15 @@ jobs:
     - name: Print diffs
       run: git --no-pager diff
 
-    - run: |
+    - name: Testing google java format
+      env:
+        GH_TOKEN: ${{ secrets.GH_TOKEN }}
+      run: |
         curl -LOk https://github.com/google/google-java-format/releases/download/v1.18.1/google-java-format-1.18.1-all-deps.jar
         java -jar google-java-format-1.18.1-all-deps.jar src/main/java/org/tictactoe/Game.java
         FILES=$(gh pr diff --name-only)
         echo -n  $FILES | jq -R -s '{ javaFiles: split("\n") | map(select(test("\\.java$")))}'
+      
         
         
 
