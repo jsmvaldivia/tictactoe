@@ -10,7 +10,6 @@ name: Java CI with Maven
 permissions:
   contents: read
   security-events: write
-  id-token: write
   
 on:
   pull_request:
