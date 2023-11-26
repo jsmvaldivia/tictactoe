@@ -62,7 +62,7 @@ jobs:
 
           # Print the comment
           echo "$comment"
-          gh pr comment ${{ github.event.number }} -b $comment
+          gh pr comment ${{ github.event.number }} -b "$comment"
           
           echo "::error::Code formatting suggestion detected. Please review and apply the suggested changes."
           exit 1
