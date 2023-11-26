@@ -28,13 +28,7 @@ jobs:
         cache: maven
     - name: Build with Maven
       run: mvn -B package --file pom.xml
-    - uses: axel-op/googlejavaformat-action@v3
-      with:
-        args: "--replace"
-        skip-commit: true
-    - name: Print diffs
-      run: git --no-pager diff
-
+      
     - name: Testing google java format
       env:
         GH_TOKEN: ${{ secrets.GH_TOKEN }}
