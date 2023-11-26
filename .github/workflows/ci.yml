@@ -50,15 +50,15 @@ jobs:
           java -jar google-java-format-1.18.1-all-deps.jar "$file" > "${file}_formatted"
           if ! cmp -s "$formatted_file" "$file"; then
             echo "$file is not properly formatted"
-            differing_files+=("$formatted_file")            
+            differing_files+=("$file")            
           fi
         done
 
         if [ ${#differing_files[@]} -gt 0 ]; then
          comment="Suggested code formatting changes:"
-          for difffile in "${differing_files[@]}"; do
-            comment+="\n\n $difffile \n\n\`\`\`"
-          done
+         for file in "${differing_files[@]}"; do
+           comment+="\n\n### ${file}\n\`\`\`java\n$(cat "$file")\n\`\`\`"
+         done
 
           # Print the comment
           echo "$comment"
